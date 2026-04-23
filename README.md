@@ -9,8 +9,6 @@
 
 **The AI Task Platform** is a robust, production-ready full-stack application designed to scale background task processing. Built with the MERN stack, it leverages a high-performance Python worker and Redis-based task queue to handle intensive computations asynchronously.
 
-![Dashboard Preview](file:///C:/Users/ma/.gemini/antigravity/brain/98bcec47-b61e-4f5f-bde6-c49d7ab471ea/platform_dashboard_preview_1776929127279.png)
-
 ## ✨ Core Features
 
 - 🔐 **Secure Authentication**: JWT-based authentication system with protected routes.
