@@ -108,15 +108,15 @@ jobs:
 
       - name: Update backend image tag
         run: |
-          sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-backend:.*|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-backend:${{ steps.tag.outputs.TAG }}|g" backend/deployment.yaml
+          sed -i "s|image: .*backend:.*|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-backend:${{ steps.tag.outputs.TAG }}|g" 04-backend.yaml
 
       - name: Update frontend image tag
         run: |
-          sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-frontend:.*|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-frontend:${{ steps.tag.outputs.TAG }}|g" frontend/deployment.yaml
+          sed -i "s|image: .*frontend:.*|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-frontend:${{ steps.tag.outputs.TAG }}|g" 06-frontend.yaml
 
       - name: Update worker image tag
         run: |
-          sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-worker:.*|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-worker:${{ steps.tag.outputs.TAG }}|g" worker/deployment.yaml
+          sed -i "s|image: .*worker:.*|image: ${{ secrets.DOCKER_USERNAME }}/ai-task-worker:${{ steps.tag.outputs.TAG }}|g" 05-worker.yaml
 
       - name: Commit and push updated tags
         run: |
