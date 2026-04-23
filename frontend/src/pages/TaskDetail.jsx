@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import StatusBadge from '../components/StatusBadge';
@@ -13,7 +14,7 @@ const TaskDetail = () => {
   const [error, setError] = useState(null);
   const [actionError, setActionError] = useState(null);
 
-  const fetchTask = async () => {
+  const fetchTask = useCallback(async () => {
     try {
       const response = await api.get(`/tasks/${id}`);
       setTask(response.data);
@@ -23,7 +24,7 @@ const TaskDetail = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
 
   const handleRunTask = async () => {
     try {
@@ -54,7 +55,7 @@ const TaskDetail = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [id, navigate]);
+  }, [id, navigate, fetchTask]);
 
   if (isLoading && !task) {
     return (

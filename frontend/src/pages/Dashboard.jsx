@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import TaskCard from '../components/TaskCard';
@@ -12,7 +13,7 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const response = await api.get('/tasks');
       setTasks(response.data);
@@ -24,7 +25,7 @@ const Dashboard = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [navigate]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -41,7 +42,7 @@ const Dashboard = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [navigate]);
+  }, [navigate, fetchTasks]);
 
   const handleTaskCreated = () => {
     fetchTasks();
